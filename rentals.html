@@ -20,7 +20,7 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
@@ -40,7 +40,7 @@
 
         .summary-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 15px;
             margin-top: 20px;
         }
@@ -51,6 +51,14 @@
             padding: 20px;
             border-radius: 10px;
             text-align: center;
+        }
+
+        .stat-card.warning {
+            background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
+        }
+
+        .stat-card.info {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
         }
 
         .stat-value {
@@ -66,7 +74,7 @@
 
         .properties-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
             gap: 25px;
             margin-bottom: 30px;
         }
@@ -102,8 +110,36 @@
             font-size: 0.95em;
         }
 
-        .property-details {
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
             margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .metric-label {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .metric-note {
+            font-size: 0.75em;
+            color: #999;
+            font-style: italic;
         }
 
         .detail-row {
@@ -128,6 +164,10 @@
             font-size: 1.2em;
         }
 
+        .expense-amount {
+            color: #e74c3c;
+        }
+
         .lease-expiring {
             background: #fff3cd;
             color: #856404;
@@ -148,7 +188,7 @@
             border-left: 4px solid #ff4757;
         }
 
-        .calendar-section {
+        .section {
             background: white;
             border-radius: 15px;
             padding: 30px;
@@ -156,12 +196,46 @@
             margin-bottom: 30px;
         }
 
-        .calendar-title {
+        .section-title {
             font-size: 1.8em;
             color: #27ae60;
             margin-bottom: 20px;
             padding-bottom: 15px;
             border-bottom: 2px solid #f0f0f0;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .kpi-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #27ae60;
+        }
+
+        .kpi-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 5px;
+        }
+
+        .kpi-label {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .kpi-note {
+            font-size: 0.75em;
+            color: #999;
+            margin-top: 5px;
+            font-style: italic;
         }
 
         .calendar-grid {
@@ -210,6 +284,10 @@
             h1 {
                 font-size: 2em;
             }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -217,7 +295,7 @@
     <div class="container">
         <header>
             <h1>🏠 Rental Properties Dashboard</h1>
-            <p class="property-type">Erik Cooper Real Estate Portfolio</p>
+            <p class="property-type">Erik Cooper Real Estate Portfolio | Professional Landlord KPIs</p>
 
             <div class="summary-stats">
                 <div class="stat-card">
@@ -226,74 +304,67 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">$9,200</div>
-                    <div class="stat-label">Monthly Income</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">100%</div>
-                    <div class="stat-label">Occupancy</div>
+                    <div class="stat-label">Monthly Rent</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">$110,400</div>
-                    <div class="stat-label">Annual Income</div>
+                    <div class="stat-label">Annual Rent</div>
+                </div>
+                <div class="stat-card info">
+                    <div class="stat-value">$2,889</div>
+                    <div class="stat-label">Monthly Cash Flow*</div>
+                </div>
+                <div class="stat-card info">
+                    <div class="stat-value">$34,668</div>
+                    <div class="stat-label">Annual Cash Flow*</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Occupancy Rate</div>
                 </div>
             </div>
+            <p style="font-size: 0.8em; color: #666; margin-top: 10px;">*Before property tax & insurance on Lillian Mae properties</p>
         </header>
 
+        <!-- Portfolio KPIs Section -->
+        <div class="section">
+            <h2 class="section-title">📊 Portfolio Performance Metrics</h2>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-value">31.4%</div>
+                    <div class="kpi-label">Gross Yield</div>
+                    <div class="kpi-note">Annual rent / Invested capital</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">TBD</div>
+                    <div class="kpi-label">Cash-on-Cash Return</div>
+                    <div class="kpi-note">Need: Purchase prices & down payments</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">TBD</div>
+                    <div class="kpi-label">Cap Rate</div>
+                    <div class="kpi-note">Need: NOI & property values</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">68.6%</div>
+                    <div class="kpi-label">Operating Expense Ratio*</div>
+                    <div class="kpi-note">Debt service / Gross rent</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">100%</div>
+                    <div class="kpi-label">Rent Collection Rate</div>
+                    <div class="kpi-note">On-time payments</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">TBD</div>
+                    <div class="kpi-label">Net Operating Income</div>
+                    <div class="kpi-note">Need: Full expense breakdown</div>
+                </div>
+            </div>
+            <p style="font-size: 0.85em; color: #999; margin-top: 15px; font-style: italic;">*Incomplete - missing property tax, insurance, maintenance for Lillian Mae properties</p>
+        </div>
+
         <div class="properties-grid">
-            <!-- Baton Rouge Property 1 -->
-            <div class="property-card">
-                <div class="property-header">
-                    <div class="property-address">8503 Lillian Mae Lane</div>
-                    <div class="property-type">Baton Rouge, LA 70806 • Townhome</div>
-                </div>
-
-                <div class="property-details">
-                    <div class="detail-row">
-                        <span class="detail-label">Tenant</span>
-                        <span class="detail-value">Courtney Viator</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Monthly Rent</span>
-                        <span class="detail-value rent-amount">$2,500</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Management</span>
-                        <span class="detail-value">TurboTenant</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Lease Status</span>
-                        <span class="detail-value">Active</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Baton Rouge Property 2 -->
-            <div class="property-card">
-                <div class="property-header">
-                    <div class="property-address">8505 Lillian Mae Lane</div>
-                    <div class="property-type">Baton Rouge, LA 70806 • Townhome</div>
-                </div>
-
-                <div class="property-details">
-                    <div class="detail-row">
-                        <span class="detail-label">Tenant</span>
-                        <span class="detail-value">Edrick Caraballo</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Monthly Rent</span>
-                        <span class="detail-value rent-amount">$2,500</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Management</span>
-                        <span class="detail-value">TurboTenant</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Lease Status</span>
-                        <span class="detail-value">Active</span>
-                    </div>
-                </div>
-            </div>
-
             <!-- Largo Property -->
             <div class="property-card">
                 <div class="property-header">
@@ -301,18 +372,37 @@
                     <div class="property-type">Largo, FL 33770 • Single Family Home</div>
                 </div>
 
-                <div class="property-details">
+                <div class="metrics-grid">
+                    <div class="metric">
+                        <div class="metric-value">$4,200</div>
+                        <div class="metric-label">Monthly Rent</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">$3,938</div>
+                        <div class="metric-label">PITI Payment</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">$262</div>
+                        <div class="metric-label">Monthly Cash Flow</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">6.2%</div>
+                        <div class="metric-label">Cash Flow Margin</div>
+                    </div>
+                </div>
+
+                <div class="property-details" style="margin-top: 20px;">
                     <div class="detail-row">
                         <span class="detail-label">Tenant</span>
                         <span class="detail-value">Keri Viegas</span>
                     </div>
                     <div class="detail-row">
-                        <span class="detail-label">Monthly Rent</span>
-                        <span class="detail-value rent-amount">$4,200</span>
-                    </div>
-                    <div class="detail-row">
                         <span class="detail-label">Rent Due</span>
                         <span class="detail-value">22nd of each month</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Lender</span>
+                        <span class="detail-value">Lakeview Loan</span>
                     </div>
                     <div class="detail-row">
                         <span class="detail-label">Management</span>
@@ -322,6 +412,18 @@
                         <span class="detail-label">Lease Expires</span>
                         <span class="detail-value">June 2, 2026</span>
                     </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Annual Rent</span>
+                        <span class="detail-value rent-amount">$50,400</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Annual Debt Service</span>
+                        <span class="detail-value expense-amount">$47,256</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Annual Cash Flow</span>
+                        <span class="detail-value rent-amount">$3,144</span>
+                    </div>
                 </div>
 
                 <div class="lease-expiring">
@@ -329,13 +431,171 @@
                 </div>
 
                 <div class="action-needed">
-                    🔴 Refi/Sell decision due March 30, 2026
+                    🔴 Refi/Sell decision due March 30, 2026 (26 days)
+                </div>
+            </div>
+
+            <!-- Lillian Mae Property 1 -->
+            <div class="property-card">
+                <div class="property-header">
+                    <div class="property-address">8503 Lillian Mae Lane</div>
+                    <div class="property-type">Baton Rouge, LA 70806 • Townhome</div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric">
+                        <div class="metric-value">$2,500</div>
+                        <div class="metric-label">Monthly Rent</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">$1,187</div>
+                        <div class="metric-label">Debt Service*</div>
+                        <div class="metric-note">50% of combined loan</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">$1,313</div>
+                        <div class="metric-label">Cash Flow*</div>
+                        <div class="metric-note">Before prop tax/ins</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">52.5%</div>
+                        <div class="metric-label">Margin*</div>
+                        <div class="metric-note">Incomplete</div>
+                    </div>
+                </div>
+
+                <div class="property-details" style="margin-top: 20px;">
+                    <div class="detail-row">
+                        <span class="detail-label">Tenant</span>
+                        <span class="detail-value">Courtney Viator</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Loan Type</span>
+                        <span class="detail-value">Commercial (Interest Only Y1)</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Management</span>
+                        <span class="detail-value">TurboTenant</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Purchased</span>
+                        <span class="detail-value">Mid-2025</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Annual Rent</span>
+                        <span class="detail-value rent-amount">$30,000</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Annual Debt Service*</span>
+                        <span class="detail-value expense-amount">$14,244</span>
+                    </div>
+                </div>
+
+                <div class="lease-expiring">
+                    ℹ️ Property tax & insurance NOT in debt service - add for true NOI
+                </div>
+            </div>
+
+            <!-- Lillian Mae Property 2 -->
+            <div class="property-card">
+                <div class="property-header">
+                    <div class="property-address">8505 Lillian Mae Lane</div>
+                    <div class="property-type">Baton Rouge, LA 70806 • Townhome</div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric">
+                        <div class="metric-value">$2,500</div>
+                        <div class="metric-label">Monthly Rent</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">$1,187</div>
+                        <div class="metric-label">Debt Service*</div>
+                        <div class="metric-note">50% of combined loan</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">$1,313</div>
+                        <div class="metric-label">Cash Flow*</div>
+                        <div class="metric-note">Before prop tax/ins</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">52.5%</div>
+                        <div class="metric-label">Margin*</div>
+                        <div class="metric-note">Incomplete</div>
+                    </div>
+                </div>
+
+                <div class="property-details" style="margin-top: 20px;">
+                    <div class="detail-row">
+                        <span class="detail-label">Tenant</span>
+                        <span class="detail-value">Edrick Caraballo</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Loan Type</span>
+                        <span class="detail-value">Commercial (Interest Only Y1)</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Management</span>
+                        <span class="detail-value">TurboTenant</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Purchased</span>
+                        <span class="detail-value">Mid-2025</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Annual Rent</span>
+                        <span class="detail-value rent-amount">$30,000</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Annual Debt Service*</span>
+                        <span class="detail-value expense-amount">$14,244</span>
+                    </div>
+                </div>
+
+                <div class="lease-expiring">
+                    ℹ️ Property tax & insurance NOT in debt service - add for true NOI
                 </div>
             </div>
         </div>
 
-        <div class="calendar-section">
-            <h2 class="calendar-title">📅 Upcoming Events</h2>
+        <!-- Combined Lillian Mae Summary -->
+        <div class="section">
+            <h2 class="section-title">💰 Lillian Mae Combined Performance</h2>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-value">$5,000</div>
+                    <div class="kpi-label">Monthly Rent (Combined)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">$2,373</div>
+                    <div class="kpi-label">Debt Service</div>
+                    <div class="kpi-note">Interest only, no prop tax/ins</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">$2,627</div>
+                    <div class="kpi-label">Monthly Cash Flow*</div>
+                    <div class="kpi-note">Before prop tax & insurance</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">$60,000</div>
+                    <div class="kpi-label">Annual Rent</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">$28,481</div>
+                    <div class="kpi-label">Annual Debt Service</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">$31,519</div>
+                    <div class="kpi-label">Annual Cash Flow*</div>
+                    <div class="kpi-note">Before prop tax & insurance</div>
+                </div>
+            </div>
+            <p style="font-size: 0.85em; color: #999; margin-top: 15px; font-style: italic;">*Entity: CDT Investments LLC | 2025 Revenue: $52k (partial year, purchased mid-2025)</p>
+        </div>
+
+        <!-- Calendar Section -->
+        <div class="section">
+            <h2 class="section-title">📅 Upcoming Events</h2>
             <div class="calendar-grid">
                 <div class="calendar-item">
                     <span class="calendar-date">Mar 22</span>
@@ -356,22 +616,19 @@
             </div>
         </div>
 
-        <div class="calendar-section">
-            <h2 class="calendar-title">💰 Portfolio Summary - Baton Rouge</h2>
-            <div class="property-details">
-                <div class="detail-row">
-                    <span class="detail-label">Total Units (Baton Rouge)</span>
-                    <span class="detail-value">2 townhomes</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Monthly Income</span>
-                    <span class="detail-value rent-amount">$5,000</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Annual Income</span>
-                    <span class="detail-value rent-amount">$60,000</span>
-                </div>
-            </div>
+        <!-- Data Needed Section -->
+        <div class="section">
+            <h2 class="section-title">📋 Missing Data for Complete Analysis</h2>
+            <p style="margin-bottom: 15px; color: #666;">To calculate complete KPIs (COC Return, Cap Rate, true NOI), we need:</p>
+            <ul style="margin-left: 20px; color: #666; line-height: 1.8;">
+                <li><strong>Purchase prices</strong> for each property (for COC calculation)</li>
+                <li><strong>Down payment amounts</strong> for each property (for COC calculation)</li>
+                <li><strong>Property tax</strong> (monthly) for Lillian Mae properties</li>
+                <li><strong>Property insurance</strong> (monthly) for Lillian Mae properties</li>
+                <li><strong>Maintenance/HOA costs</strong> (if any)</li>
+                <li><strong>Current property values</strong> (for cap rate calculation)</li>
+            </ul>
+            <p style="margin-top: 15px; font-size: 0.9em; color: #999; font-style: italic;">Check TurboTenant for lease details and expenses. Property insurance/tax info previously shared.</p>
         </div>
 
         <a href="index.html" class="nav-link">← Back to TDL Dashboard</a>
