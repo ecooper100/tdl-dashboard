@@ -656,5 +656,57 @@
             </ul>
         </div>
     </div>
+
+    <script>
+        // TDL Checkbox functionality with localStorage sync
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make all checkboxes clickable
+            const checkboxes = document.querySelectorAll('.task-checkbox');
+
+            checkboxes.forEach((checkbox, index) => {
+                // Make checkbox interactive
+                checkbox.style.cursor = 'pointer';
+
+                // Add click handler
+                checkbox.addEventListener('click', function() {
+                    const taskItem = this.closest('.task-item');
+                    const taskText = taskItem.querySelector('.task-text').textContent.trim();
+
+                    // Toggle checked state visually
+                    if (this.classList.contains('checked')) {
+                        this.classList.remove('checked');
+                        this.style.backgroundColor = '';
+                        this.innerHTML = '';
+                        taskItem.style.opacity = '1';
+
+                        // Remove from localStorage
+                        removeFromCompleted(taskText);
+                    } else {
+                        this.classList.add('checked');
+                        this.style.backgroundColor = '#667eea';
+                        this.innerHTML = '<span style="color: white; font-weight: bold;">✓</span>';
+                        taskItem.style.opacity = '0.6';
+
+                        // Add to localStorage
+                        addToCompleted(taskText);
+                    }
+                });
+            });
+        });
+
+        function addToCompleted(taskText) {
+            const completed = JSON.parse(localStorage.getItem('tdl-completed') || '[]');
+            if (!completed.includes(taskText)) {
+                completed.push(taskText);
+                localStorage.setItem('tdl-completed', JSON.stringify(completed));
+            }
+        }
+
+        function removeFromCompleted(taskText) {
+            let completed = JSON.parse(localStorage.getItem('tdl-completed') || '[]');
+            completed = completed.filter(t => t !== taskText);
+            localStorage.setItem('tdl-completed', JSON.stringify(completed));
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TDL Sync Helper - Erik Cooper</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.95em;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        #completedList {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 100px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .empty-state {
+            color: #999;
+            font-style: italic;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 15px 25px;
+            font-size: 1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .instructions {
+            background: #fff3cd;
+            border-left: 4px solid #ffa502;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .instructions h3 {
+            color: #856404;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+            color: #856404;
+        }
+
+        .instructions li {
+            margin-bottom: 5px;
+        }
+
+        .success-message {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .count {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-left: 10px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>📋 TDL Sync Helper</h1>
+            <p class="subtitle">Send completed tasks to Rico</p>
+
+            <div class="instructions">
+                <h3>📌 How to use:</h3>
+                <ol>
+                    <li>Check off tasks on the <a href="index.html">main TDL dashboard</a></li>
+                    <li>Come to this page to see your completed tasks</li>
+                    <li>Click "Copy to Clipboard" below</li>
+                    <li>Send the text to Rico via WhatsApp</li>
+                    <li>Rico will update TDL.md automatically</li>
+                </ol>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                ✅ Copied to clipboard! Now send it to Rico via WhatsApp.
+            </div>
+
+            <div class="section">
+                <div class="section-title">
+                    Completed Tasks
+                    <span class="count" id="taskCount">0</span>
+                </div>
+                <div id="completedList"></div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-primary" onclick="copyToClipboard()">📋 Copy to Clipboard</button>
+                <button class="btn-secondary" onclick="refreshList()">🔄 Refresh</button>
+                <button class="btn-danger" onclick="clearCompleted()">🗑️ Clear Completed</button>
+            </div>
+
+            <a href="index.html" class="back-link">← Back to TDL Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        function loadCompletedTasks() {
+            const completed = JSON.parse(localStorage.getItem('tdl-completed') || '[]');
+            const listEl = document.getElementById('completedList');
+            const countEl = document.getElementById('taskCount');
+
+            countEl.textContent = completed.length;
+
+            if (completed.length === 0) {
+                listEl.innerHTML = '<div class="empty-state">No completed tasks yet. Check off tasks on the main dashboard first!</div>';
+                return '';
+            }
+
+            // Format tasks for Rico
+            const message = `Rico, please mark these tasks as completed in TDL.md:\n\n${completed.map((task, i) => `${i + 1}. ${task}`).join('\n')}`;
+
+            listEl.textContent = message;
+            return message;
+        }
+
+        function copyToClipboard() {
+            const message = loadCompletedTasks();
+            if (!message) {
+                alert('No completed tasks to copy!');
+                return;
+            }
+
+            navigator.clipboard.writeText(message).then(() => {
+                const successMsg = document.getElementById('successMessage');
+                successMsg.classList.add('show');
+                setTimeout(() => {
+                    successMsg.classList.remove('show');
+                }, 3000);
+            }).catch(err => {
+                alert('Failed to copy: ' + err);
+            });
+        }
+
+        function refreshList() {
+            loadCompletedTasks();
+        }
+
+        function clearCompleted() {
+            if (confirm('Are you sure you want to clear all completed tasks? This cannot be undone.')) {
+                localStorage.removeItem('tdl-completed');
+                loadCompletedTasks();
+            }
+        }
+
+        // Load on page load
+        window.addEventListener('DOMContentLoaded', loadCompletedTasks);
+    </script>
+</body>
+</html>
