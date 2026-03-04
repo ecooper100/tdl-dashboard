@@ -20,7 +20,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -28,7 +28,7 @@
             background: white;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             margin-bottom: 30px;
         }
 
@@ -43,35 +43,6 @@
             font-size: 0.9em;
         }
 
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .stat {
-            text-align: center;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            flex: 1;
-            min-width: 120px;
-        }
-
-        .stat-number {
-            font-size: 2em;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .stat-label {
-            color: #666;
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
-
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -83,13 +54,13 @@
             background: white;
             border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
         }
 
         .card h2 {
@@ -114,44 +85,29 @@
 
         .priority-project {
             border-left: 5px solid #9b59b6;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
 
         .task-item {
             padding: 12px 0;
             border-bottom: 1px solid #eee;
-            display: flex;
-            align-items: flex-start;
+            font-size: 0.95em;
+            line-height: 1.6;
         }
 
         .task-item:last-child {
             border-bottom: none;
         }
 
-        .task-checkbox {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #667eea;
-            border-radius: 4px;
-            margin-right: 12px;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .task-text {
-            flex-grow: 1;
-            line-height: 1.6;
-        }
-
-        .task-indent {
-            margin-left: 32px;
-            color: #666;
-            font-size: 0.95em;
+        .task-item::before {
+            content: "☐ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 8px;
         }
 
         .date-badge {
             display: inline-block;
-            background: #667eea;
+            background: #e74c3c;
             color: white;
             padding: 4px 12px;
             border-radius: 20px;
@@ -160,63 +116,86 @@
             margin-bottom: 15px;
         }
 
-        .urgent-badge {
+        .date-badge.today {
             background: #e74c3c;
         }
 
-        .closing-badge {
-            background: #27ae60;
+        .date-badge.week {
+            background: #f39c12;
         }
 
-        .section-header {
-            font-weight: 600;
-            color: #667eea;
-            margin-top: 15px;
-            margin-bottom: 10px;
-            font-size: 1.1em;
+        .date-badge.upcoming {
+            background: #3498db;
+        }
+
+        .project-card {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #9b59b6 0%, #667eea 100%);
+            color: white;
+        }
+
+        .project-card h2 {
+            color: white;
+            border-bottom-color: rgba(255,255,255,0.3);
+        }
+
+        .project-card .task-item {
+            border-bottom-color: rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.95);
+        }
+
+        .project-card .task-item::before {
+            color: white;
         }
 
         .project-header {
-            background: #9b59b6;
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        .project-header h3 {
-            font-size: 1.3em;
-            margin-bottom: 5px;
-        }
-
-        .project-target {
-            font-size: 0.9em;
-            opacity: 0.9;
-        }
-
-        .empty-state {
-            text-align: center;
-            color: #27ae60;
+            font-size: 1.2em;
             font-weight: 600;
-            padding: 20px;
-            font-size: 1.1em;
+            margin: 20px 0 10px 0;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.2);
         }
 
-        .completed-section {
-            background: #d4edda;
-            border-left: 5px solid #28a745;
-            margin-top: 20px;
+        .project-header:first-of-type {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: none;
         }
 
-        .completed-section h2 {
-            color: #28a745;
-            border-bottom-color: #28a745;
+        .target-date {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: 600;
         }
 
-        .completed-item {
-            color: #155724;
-            text-decoration: line-through;
-            opacity: 0.8;
+        .closing-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .closing-item:last-child {
+            border-bottom: none;
+        }
+
+        .closing-date {
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
         }
 
         @media (max-width: 768px) {
@@ -225,21 +204,39 @@
             }
 
             h1 {
-                font-size: 2em;
+                font-size: 1.8em;
             }
 
-            .card {
-                padding: 20px;
+            .project-card {
+                grid-column: 1;
             }
         }
 
-        footer {
-            text-align: center;
-            color: white;
-            margin-top: 30px;
-            padding: 20px;
+        .stats {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 10px;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
             font-size: 0.9em;
-            opacity: 0.9;
+            color: #666;
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -247,206 +244,125 @@
     <div class="container">
         <header>
             <h1>📋 Erik's TDL Dashboard</h1>
-            <p class="last-updated">Last updated: March 4, 2026 | Auto-refreshed daily by Rico</p>
+            <p class="last-updated">Last updated: March 4, 2026</p>
             <div class="stats">
-                <div class="stat">
+                <div class="stat-box">
                     <div class="stat-number">3</div>
-                    <div class="stat-label">Tasks Today</div>
+                    <div class="stat-label">Today's Tasks</div>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">0</div>
-                    <div class="stat-label">Overdue</div>
-                </div>
-                <div class="stat">
+                <div class="stat-box">
                     <div class="stat-number">6</div>
-                    <div class="stat-label">Closings This Month</div>
+                    <div class="stat-label">Real Estate Closings</div>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">6</div>
-                    <div class="stat-label">Completed Today</div>
+                <div class="stat-box">
+                    <div class="stat-number">May 15</div>
+                    <div class="stat-label">Gottfried Target Close</div>
                 </div>
             </div>
         </header>
 
-        <!-- High Priority Section -->
         <div class="grid">
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-icon">🔥</span>
-                    <h2 class="card-title">Today - March 4</h2>
-                    <span class="priority-badge badge-urgent">URGENT</span>
-                </div>
-                <ul class="task-list">
-                    <li class="task-item">Send Michelle (church) passport and ID photo for Ecuador trip (flight tickets purchasing after April 2nd)</li>
-                    <li class="task-item">Send out RFP emails to banks for Gottfried financing</li>
-                    <li class="task-item">Brief Rico on all properties - answer questions about:
-                        <ul style="margin-left: 20px; margin-top: 8px;">
-                            <li style="list-style: disc; color: #718096;">All rental properties (3 rentals: Lillian Mae townhomes, Largo SFH)</li>
-                            <li style="list-style: disc; color: #718096;">Vacant land I own</li>
-                            <li style="list-style: disc; color: #718096;">Land I'm trying to sell</li>
-                            <li style="list-style: disc; color: #718096;">Land I'm trying to buy (B Greene, Roosevelt, LA-442 subdivisions)</li>
-                            <li style="list-style: disc; color: #718096;">Flip house status (Cloverleaf Drive)</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-icon">✅</span>
-                    <h2 class="card-title">Completed Today</h2>
-                    <span class="priority-badge badge-medium">DONE</span>
-                </div>
-                <ul class="task-list">
-                    <li class="task-item completed">Send Clayton Thompson (First South Farm Credit) 2026 income projection for Barry Greene 153-acre financing</li>
-                    <li class="task-item completed">1:00 PM - Call Jacobo (in calendar)</li>
-                    <li class="task-item completed">Refill cold plunge</li>
-                    <li class="task-item completed">Share etwa calendar and tell Rico</li>
-                    <li class="task-item completed">Cancel grok subscription</li>
-                    <li class="task-item completed">Move money for B Greene closing - $80k transferred from Fidelity to Solera</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Gottfried Project -->
-        <div class="card project-card">
-            <div class="card-header">
-                <span class="card-icon">🏗️</span>
-                <h2 class="card-title">PROJECT: Gottfried Construction Acquisition</h2>
-            </div>
-
-            <div class="project-meta">
-                <strong>🎯 Target Close Date: May 15, 2026</strong>
-                <p style="margin-top: 5px; opacity: 0.9;">Major business acquisition - SBA financing, due diligence, and Section 338(h)(10) election strategy</p>
-            </div>
-
-            <h3 style="font-size: 1.2rem; margin-bottom: 15px; margin-top: 10px;">⚡ Immediate (This Week - Mar 2-9)</h3>
-            <ul class="task-list">
-                <li class="task-item">Determine cash/equity requirements for acquisition and explore cross-collateralization options for financing</li>
-                <li class="task-item">Submit Preliminary Due Diligence List to seller</li>
-                <li class="task-item">Submit formal LOI via Chris Marrone (attorney)</li>
-                <li class="task-item">Contact SBA Preferred Lenders for financing (Gulf Coast Bank, Home Bank, Louisiana National Bank, Live Oak Bank, Ready Capital)</li>
-                <li class="task-item">Schedule initial lender meetings/calls</li>
-                <li class="task-item">Gather financial docs for lender (tax returns, personal financial statement)</li>
-                <li class="task-item">Consult with CPA on Section 338(h)(10) election strategy (stock sale with asset sale tax treatment)</li>
-                <li class="task-item">Review existing LLC operating agreement and tax elections with CPA</li>
-                <li class="task-item">Discuss purchase price allocation strategy with CPA for 338(h)(10) election</li>
-                <li class="task-item">Review REPS status and tax planning strategy with CPA (construction losses + real estate losses)</li>
-            </ul>
-        </div>
-
-        <div class="section-divider">
-            <h2>🏡 Real Estate Closings</h2>
-        </div>
-
-        <div class="grid">
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-icon">📅</span>
-                    <h2 class="card-title">Upcoming Closings</h2>
-                    <span class="priority-badge badge-high">THIS MONTH</span>
-                </div>
-                <div class="task-list">
-                    <div class="closing-item">
-                        <span>Roosevelt Rd</span>
-                        <span class="closing-date closing-urgent">Mar 12 (8 days)</span>
-                    </div>
-                    <div class="closing-item">
-                        <span>Barry Greene 19 acres (Solo 401k)</span>
-                        <span class="closing-date closing-urgent">Mar 17 (13 days)</span>
-                    </div>
-                    <div class="closing-item">
-                        <span>Barry Greene 153 acres (First South Farm Credit)</span>
-                        <span class="closing-date closing-urgent">Mar 17 (13 days)</span>
-                    </div>
-                    <div class="closing-item">
-                        <span>CDT2</span>
-                        <span class="closing-date closing-urgent">Mar 19 (15 days)</span>
-                    </div>
-                    <div class="closing-item">
-                        <span>CDT5</span>
-                        <span class="closing-date closing-urgent">Mar 23 (19 days)</span>
-                    </div>
-                    <div class="closing-item">
-                        <span>E Washington Estate 19.4 acres (Donaldsonville)</span>
-                        <span class="closing-date">~Apr 10</span>
+            <!-- Today's Tasks -->
+            <div class="card priority-high">
+                <h2>🔥 Today - March 4</h2>
+                <span class="date-badge today">URGENT</span>
+                <div class="task-item">Send Michelle (church) passport and ID photo for Ecuador trip (flight tickets purchasing after April 2nd)</div>
+                <div class="task-item">Send out RFP emails to banks for Gottfried financing</div>
+                <div class="task-item">Brief Rico on all properties - answer questions about:
+                    <div style="margin-left: 20px; margin-top: 8px; font-size: 0.9em; color: #666;">
+                        • All rental properties (3 rentals: Lillian Mae townhomes, Largo SFH)<br>
+                        • Vacant land I own<br>
+                        • Land I'm trying to sell<br>
+                        • Land I'm trying to buy (B Greene, Roosevelt, LA-442 subdivisions)<br>
+                        • Flip house status (Cloverleaf Drive)
                     </div>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-icon">💼</span>
-                    <h2 class="card-title">Business Items</h2>
+            <!-- Real Estate Closings -->
+            <div class="card priority-medium">
+                <h2>🏠 Real Estate Closings</h2>
+                <span class="date-badge week">NEXT 3 WEEKS</span>
+                <div class="closing-item">
+                    <span>Roosevelt Rd</span>
+                    <span class="closing-date">Mar 12</span>
                 </div>
-                <ul class="task-list">
-                    <li class="task-item">Review and evaluate business opportunity from Jeff Prisk</li>
-                    <li class="task-item">Ben Johnson should have permission from court to sell property (Mar 9)</li>
-                    <li class="task-item">Alex cancel country club membership??? (Mar 11)</li>
-                </ul>
+                <div class="closing-item">
+                    <span>Barry Greene 19 acres</span>
+                    <span class="closing-date">Mar 17</span>
+                </div>
+                <div class="section-subtitle">Buyer: CDT Management Services Retirement Plan Trust (Solo 401k)</div>
+                <div class="closing-item" style="margin-top: 10px;">
+                    <span>Barry Greene 153 acres</span>
+                    <span class="closing-date">Mar 17</span>
+                </div>
+                <div class="section-subtitle">Buyer: CDT Management Services LLC (First South Farm Credit financing)</div>
+                <div class="closing-item" style="margin-top: 10px;">
+                    <span>CDT2</span>
+                    <span class="closing-date">Mar 19</span>
+                </div>
+                <div class="closing-item">
+                    <span>CDT5</span>
+                    <span class="closing-date">Mar 23</span>
+                </div>
+                <div class="closing-item">
+                    <span>E Washington Estate 19.4 acres</span>
+                    <span class="closing-date">~Apr 10</span>
+                </div>
+                <div class="section-subtitle">Donaldsonville - Ben Johnson</div>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-icon">🏠</span>
-                    <h2 class="card-title">Rentals</h2>
-                </div>
-                <ul class="task-list">
-                    <li class="task-item">Keri Viegas $4,200 rent due (Mar 22)</li>
-                    <li class="task-item">Jordan Lewis rental $1,100 check (Mar 28)</li>
-                </ul>
+            <!-- This Week Business -->
+            <div class="card priority-medium">
+                <h2>💼 This Week - Business</h2>
+                <span class="date-badge week">THIS WEEK</span>
+                <div class="task-item">Review and evaluate business opportunity from Jeff Prisk</div>
+                <div class="task-item">Ben Johnson should have permission from court to sell property (Mar 9)</div>
+                <div class="task-item">Alex cancel country club membership??? (Mar 11)</div>
+            </div>
 
-                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
-                    <h3 style="font-size: 1rem; color: #4a5568; margin-bottom: 10px;">This Month Decision</h3>
-                    <ul class="task-list">
-                        <li class="task-item">Largo refi decision - should I do Largo refi or just sell it? (Mar 30)</li>
-                    </ul>
-                </div>
+            <!-- Gottfried Construction Acquisition -->
+            <div class="card project-card priority-project">
+                <h2>🏗️ PROJECT: Gottfried Construction Acquisition</h2>
+                <div class="target-date">🎯 Target Close Date: May 15, 2026</div>
+
+                <div class="project-header">Immediate (This Week - Mar 2-9)</div>
+                <div class="task-item">Determine cash/equity requirements for acquisition and explore cross-collateralization options for financing</div>
+                <div class="task-item">Submit Preliminary Due Diligence List to seller</div>
+                <div class="task-item">Submit formal LOI via Chris Marrone (attorney)</div>
+                <div class="task-item">Contact SBA Preferred Lenders for financing (Gulf Coast Bank, Home Bank, Louisiana National Bank, Live Oak Bank, Ready Capital)</div>
+                <div class="task-item">Schedule initial lender meetings/calls</div>
+                <div class="task-item">Gather financial docs for lender (tax returns, personal financial statement)</div>
+                <div class="task-item">Consult with CPA on Section 338(h)(10) election strategy (stock sale with asset sale tax treatment)</div>
+                <div class="task-item">Review existing LLC operating agreement and tax elections with CPA</div>
+                <div class="task-item">Discuss purchase price allocation strategy with CPA for 338(h)(10) election (equipment, goodwill, intangibles)</div>
+                <div class="task-item">Review REPS status and tax planning strategy with CPA (construction losses + real estate losses)</div>
+
+                <div class="project-header">Key Due Diligence Areas</div>
+                <div class="task-item">Financial review: 3 years tax returns, P&Ls, balance sheets</div>
+                <div class="task-item">Customer concentration analysis (top 10 customers)</div>
+                <div class="task-item">Review all active contracts and backlog</div>
+                <div class="task-item">Equipment list and condition assessment</div>
+                <div class="task-item">Employee roster and compensation review</div>
+                <div class="task-item">Review all licenses, permits, bonds, insurance</div>
+                <div class="task-item">Legal review: litigation, liens, claims</div>
+            </div>
+
+            <!-- Rentals -->
+            <div class="card priority-low">
+                <h2>🏘️ Rentals</h2>
+                <span class="date-badge upcoming">UPCOMING</span>
+                <div class="task-item">Keri Viegas $4,200 rent due (Mar 22)</div>
+                <div class="task-item">Jordan Lewis rental $1,100 check (Mar 28)</div>
+            </div>
+
+            <!-- This Month -->
+            <div class="card priority-low">
+                <h2>📅 This Month (March)</h2>
+                <span class="date-badge upcoming">MARCH</span>
+                <div class="task-item">Largo refi decision - should I do Largo refi or just sell it? (Mar 30)</div>
             </div>
         </div>
-
-        <div class="section-divider">
-            <h2>📆 Future Items</h2>
-        </div>
-
-        <div class="grid">
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-icon">📌</span>
-                    <h2 class="card-title">April</h2>
-                </div>
-                <ul class="task-list">
-                    <li class="task-item">IRS refund follow-up - call if haven't received (Apr 16, wait full 60 days)</li>
-                    <li class="task-item">Reach out to GB Mitch Hartford re: property management roadmap (Apr 17)</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-icon">📌</span>
-                    <h2 class="card-title">June</h2>
-                </div>
-                <ul class="task-list">
-                    <li class="task-item">Largo lease expires - find new renter (Jun 2, 2026)</li>
-                    <li class="task-item">Jim Yates from Baker Hughes - recruiting might start (Jun 1)</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-icon">🔄</span>
-                    <h2 class="card-title">Recurring Items</h2>
-                </div>
-                <ul class="task-list">
-                    <li class="task-item">CDT Land site maintenance</li>
-                    <li class="task-item">Keri Viegas rent collection (22nd of each month)</li>
-                </ul>
-            </div>
-        </div>
-
-        <footer style="text-align: center; color: white; margin-top: 40px; opacity: 0.8; font-size: 0.9rem;">
-            <p>🤖 Auto-updated by Rico • Last sync: March 4, 2026</p>
-        </footer>
     </div>
 </body>
 </html>
