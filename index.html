@@ -14,8 +14,9 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px;
             min-height: 100vh;
+            padding: 20px;
+            color: #333;
         }
 
         .container {
@@ -27,19 +28,19 @@
             background: white;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             margin-bottom: 30px;
         }
 
         h1 {
-            color: #2d3748;
-            font-size: 2.5rem;
+            font-size: 2.5em;
+            color: #667eea;
             margin-bottom: 10px;
         }
 
         .last-updated {
-            color: #718096;
-            font-size: 0.95rem;
+            color: #666;
+            font-size: 0.9em;
         }
 
         .stats {
@@ -82,66 +83,43 @@
             background: white;
             border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
         }
 
-        .card-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e2e8f0;
+        .card h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            color: #667eea;
         }
 
-        .card-icon {
-            font-size: 1.8rem;
-            margin-right: 12px;
+        .priority-high {
+            border-left: 5px solid #e74c3c;
         }
 
-        .card-title {
-            color: #2d3748;
-            font-size: 1.4rem;
-            font-weight: 600;
+        .priority-medium {
+            border-left: 5px solid #f39c12;
         }
 
-        .priority-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-left: auto;
+        .priority-low {
+            border-left: 5px solid #3498db;
         }
 
-        .badge-urgent {
-            background: #feb2b2;
-            color: #742a2a;
-        }
-
-        .badge-high {
-            background: #fbd38d;
-            color: #744210;
-        }
-
-        .badge-medium {
-            background: #9ae6b4;
-            color: #22543d;
-        }
-
-        .task-list {
-            list-style: none;
+        .priority-project {
+            border-left: 5px solid #9b59b6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
 
         .task-item {
             padding: 12px 0;
-            border-bottom: 1px solid #f7fafc;
-            color: #4a5568;
-            line-height: 1.6;
+            border-bottom: 1px solid #eee;
             display: flex;
             align-items: flex-start;
         }
@@ -150,115 +128,118 @@
             border-bottom: none;
         }
 
-        .task-item::before {
-            content: "□";
-            margin-right: 10px;
-            color: #cbd5e0;
-            font-weight: bold;
+        .task-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #667eea;
+            border-radius: 4px;
+            margin-right: 12px;
             flex-shrink: 0;
+            margin-top: 2px;
         }
 
-        .task-item.completed {
-            text-decoration: line-through;
-            color: #a0aec0;
+        .task-text {
+            flex-grow: 1;
+            line-height: 1.6;
         }
 
-        .task-item.completed::before {
-            content: "✓";
-            color: #48bb78;
+        .task-indent {
+            margin-left: 32px;
+            color: #666;
+            font-size: 0.95em;
         }
 
-        .project-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .date-badge {
+            display: inline-block;
+            background: #667eea;
             color: white;
-            grid-column: 1 / -1;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 15px;
         }
 
-        .project-card .card-header {
-            border-bottom-color: rgba(255,255,255,0.3);
+        .urgent-badge {
+            background: #e74c3c;
         }
 
-        .project-card .card-title {
+        .closing-badge {
+            background: #27ae60;
+        }
+
+        .section-header {
+            font-weight: 600;
+            color: #667eea;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .project-header {
+            background: #9b59b6;
             color: white;
-        }
-
-        .project-card .task-item {
-            border-bottom-color: rgba(255,255,255,0.2);
-            color: rgba(255,255,255,0.95);
-        }
-
-        .project-card .task-item::before {
-            color: rgba(255,255,255,0.6);
-        }
-
-        .project-meta {
-            background: rgba(255,255,255,0.15);
             padding: 15px;
             border-radius: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
-        .project-meta strong {
-            display: block;
-            font-size: 1.1rem;
+        .project-header h3 {
+            font-size: 1.3em;
             margin-bottom: 5px;
         }
 
-        .section-divider {
-            background: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            margin: 20px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .section-divider h2 {
-            color: #2d3748;
-            font-size: 1.3rem;
-        }
-
-        .closing-item {
-            padding: 12px 0;
-            border-bottom: 1px solid #f7fafc;
-            color: #4a5568;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .closing-item:last-child {
-            border-bottom: none;
-        }
-
-        .closing-date {
-            font-weight: 600;
-            color: #667eea;
-            white-space: nowrap;
-            margin-left: 15px;
-        }
-
-        .closing-urgent {
-            color: #e53e3e;
+        .project-target {
+            font-size: 0.9em;
+            opacity: 0.9;
         }
 
         .empty-state {
-            color: #a0aec0;
-            font-style: italic;
-            padding: 15px 0;
+            text-align: center;
+            color: #27ae60;
+            font-weight: 600;
+            padding: 20px;
+            font-size: 1.1em;
+        }
+
+        .completed-section {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            margin-top: 20px;
+        }
+
+        .completed-section h2 {
+            color: #28a745;
+            border-bottom-color: #28a745;
+        }
+
+        .completed-item {
+            color: #155724;
+            text-decoration: line-through;
+            opacity: 0.8;
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-
             .grid {
                 grid-template-columns: 1fr;
             }
 
-            .project-card {
-                grid-column: 1;
+            h1 {
+                font-size: 2em;
             }
+
+            .card {
+                padding: 20px;
+            }
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            padding: 20px;
+            font-size: 0.9em;
+            opacity: 0.9;
         }
     </style>
 </head>
